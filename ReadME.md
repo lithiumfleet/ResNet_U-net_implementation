@@ -4,7 +4,7 @@
 ### 2. 输入参数
 + 格式: 
 ```shell
-py ./RUTask.py [-m] <PATH> [-p] <PATH> 
+py ./RUTask.py [-n] <NAME> [-m] <PATH> [-p] <PATH> 
 ```
 + 参数:
     1. -n: 模型名,必填. 'resnetXX' 'plainnetXX' 'unet' 三选一, 'XX'为数字
