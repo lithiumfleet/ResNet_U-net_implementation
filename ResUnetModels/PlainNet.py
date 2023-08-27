@@ -46,27 +46,27 @@ class PlainNet(nn.Module):
 
     def forward(self, x):
         x = self.preprocess(x)
-        print('preprocess:',x.shape)
+        # print('preprocess:',x.shape)
         x = self.layer1(x)
-        print('layer1:',x.shape)
+        # print('layer1:',x.shape)
         x = self.layer2(x)
-        print('layer2:',x.shape)
-        assert x.shape[2] == 28
+        # print('layer2:',x.shape)
+        # assert x.shape[2] == 28
         x = self.layer3(x)
-        print('layer3:',x.shape)
+        # print('layer3:',x.shape)
         x = self.layer4(x)
-        print('layer4:',x.shape)
+        # print('layer4:',x.shape)
         x = self.avg_pool(x)
         x = self.flatten(x)
-        print('flatten:',x.shape)
-        assert x.shape[1] == 512
+        # print('flatten:',x.shape)
+        # assert x.shape[1] == 512
         return self.fcnet(x)
 
-def PlainNet18():
-    return PlainNet(2,2,2,2)
+def PlainNet18(classes=1000):
+    return PlainNet(2,2,2,2, classes=classes)
 
-def PlainNet34():
-    return PlainNet(3,4,6,3)
+def PlainNet34(classes=1000):
+    return PlainNet(3,4,6,3, classes=classes)
 
 # debug
 if __name__ == '__main__':

@@ -1,2 +1,6 @@
 env/
 .vscode/
+dataset/__pycache__/
+ResUnetModels/__pycache__
+Scripts/__pycache__
+dataset/data/

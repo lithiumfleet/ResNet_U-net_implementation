@@ -82,33 +82,33 @@ class ResNet(nn.Module):
     
     def forward(self, x):
         x = self.preprocess(x)
-        print('preprocess:',x.shape)
+        # print('preprocess:',x.shape)
         x = self.layer1(x)
-        print('layer1:',x.shape)
+        # print('layer1:',x.shape)
         x = self.layer2(x)
-        print('layer2:',x.shape)
-        assert x.shape[2] == 28
+        # print('layer2:',x.shape)
+        # assert x.shape[2] == 28
         x = self.layer3(x)
-        print('layer3:',x.shape)
+        # print('layer3:',x.shape)
         x = self.layer4(x)
-        print('layer4:',x.shape)
+        # print('layer4:',x.shape)
         x = self.avg_pool(x)
         x = self.flatten(x)
-        print('flatten:',x.shape)
-        assert x.shape[1] == 512
+        # print('flatten:',x.shape)
+        # assert x.shape[1] == 512
         return self.fcnet(x)
 
-def ResNet18():
+def ResNet18(classes=1000):
     """
     for imgnet, 224*224
     """
-    return ResNet(2,2,2,2)
+    return ResNet(2,2,2,2, classes=classes)
 
-def ResNet34():
+def ResNet34(classes=1000):
     """
     for imgnet, 224*224
     """
-    return ResNet(3,4,6,3)
+    return ResNet(3,4,6,3, classes=classes)
 
 
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     # print('='*20)
     # print(rr)
     # test = torch.rand(1,3,224,224)
-    tests = torch.rand(64,3,224,224)
+    tests = torch.rand(64,3,100,356)
     print(rr(tests).shape)
     # res = b(test)
     # print(res.shape)
