@@ -3,7 +3,9 @@ from torch import zeros
 from torch.utils.data import dataloader
 from torchvision.datasets import VOCDetection, VOCSegmentation
 from PIL import Image 
-from .get_dict import Cls2Vec
+from .get_dict import Cls2Num
+# import get_dict
+# Cls2Num = get_dict.Cls2Num
 
 # def reshape(img):
 #     return img.resize((224,224))
@@ -22,7 +24,7 @@ def get_dataset_path(dataset_name:str, mode:str):
 def to_loader(dataset):
     loader = dataloader.DataLoader(
         dataset=dataset,
-        batch_size=1,  #FIXME: batchsize
+        batch_size= 16,  #FIXME: batchsize
         shuffle=True
         # collate_fn=collate
     )
@@ -39,10 +41,11 @@ compose =  torchvision.transforms.Compose([
 def preprocess(img, xml):
     img = compose(img)
     obj = xml['annotation']['object']
-    y = zeros(20) # 采用硬编码, 因为这里就是VOC, 只有20个类和背景
+    y = zeros(20) # 采用硬编码, 因为这里是VOC, 只有20个类和背景
     for i, label in enumerate(obj):
         name = label['name']
-        y += Cls2Vec[name]
+        pos = int(Cls2Num[name])
+        y[pos] = 1
     return img, y
 
 

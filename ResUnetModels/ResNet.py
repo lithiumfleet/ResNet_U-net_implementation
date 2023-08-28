@@ -60,6 +60,7 @@ class ResNet(nn.Module):
         self.avg_pool = nn.AdaptiveAvgPool2d((1,1))
         self.flatten = nn.Flatten()
         self.fcnet = nn.Linear(512, classes)
+        self.logist = nn.Sigmoid()
         
     def get_layer(self, inch, outch, num, stride=1):
         """
@@ -96,7 +97,8 @@ class ResNet(nn.Module):
         x = self.flatten(x)
         # print('flatten:',x.shape)
         # assert x.shape[1] == 512
-        return self.fcnet(x)
+        x = self.fcnet(x)
+        return self.logist(x)
 
 def ResNet18(classes=1000):
     """
@@ -125,6 +127,6 @@ if __name__ == '__main__':
     # print(rr)
     # test = torch.rand(1,3,224,224)
     tests = torch.rand(64,3,100,356)
-    print(r(tests).shape)
+    print(r(tests)[0])
     # res = b(test)
     # print(res.shape)

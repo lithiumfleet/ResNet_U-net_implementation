@@ -34,6 +34,7 @@ class PlainNet(nn.Module):
         self.avg_pool = nn.AdaptiveAvgPool2d((1,1))
         self.flatten = nn.Flatten()
         self.fcnet = nn.Linear(512, classes)
+        self.logist = nn.Sigmoid()
         
 
     def get_layer(self, inch, outch, num, stride=1):
@@ -60,7 +61,8 @@ class PlainNet(nn.Module):
         x = self.flatten(x)
         # print('flatten:',x.shape)
         # assert x.shape[1] == 512
-        return self.fcnet(x)
+        x = self.fcnet(x)
+        return self.logist(x)
 
 def PlainNet18(classes=1000):
     return PlainNet(2,2,2,2, classes=classes)
