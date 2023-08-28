@@ -116,7 +116,7 @@ def ResNet34(classes=1000):
 
 # for debug
 if __name__ == '__main__':
-    r = ResNet18()
+    r = ResNet18(classes=20)
     rr = ResNet34()
     # b = ResidualBlock(3,2)
 
@@ -125,6 +125,6 @@ if __name__ == '__main__':
     # print(rr)
     # test = torch.rand(1,3,224,224)
     tests = torch.rand(64,3,100,356)
-    print(rr(tests).shape)
+    print(r(tests).shape)
     # res = b(test)
     # print(res.shape)

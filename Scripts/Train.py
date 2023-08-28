@@ -1,6 +1,9 @@
 import torch
 from torch import device, nn 
 
+to_class  = {}
+
+
 
 def train_on_batch(loader, model, loss, optim, device):
 	size = len(loader.dataset)
@@ -12,9 +15,9 @@ def train_on_batch(loader, model, loss, optim, device):
 		ls.backward()
 		optim.step()
 		optim.zero_grad()
-		if batch % 100 == 0:
-			cur_loss, step = ls.item(), (batch+1)*len(x)
-			print("loss={:>7f} step={}/{}".format(cur_loss, step, size))
+		if batch > 0 and batch % 32 == 0:
+			cur_loss, step, num_batch= ls.item(), (batch)*len(x), batch//32
+			print("[batch:{}] loss={:>7f} step={}/{}".format(num_batch,cur_loss, step, size))
 
 def test(loader, model, loss):
 	size = len(loader.dataset)
@@ -36,5 +39,5 @@ def train(model, train_dataloader, test_dataloader, loss_function, optimizer, ep
     for i in range(epoch):
         print("Epoch {}\n----------------------------".format(i))
         train_on_batch(train_dataloader, model, loss_function, optimizer, device)
-        test(test_dataloader, model, loss_function)
+        test(test_dataloader, model, loss_function) #TODO
     print("done")
