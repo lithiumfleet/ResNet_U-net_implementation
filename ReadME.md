@@ -1,6 +1,7 @@
 # ResNet, U-Net 论文阅读实践部分
-## 使用RUTask
+## 使用RUTask(目前不可用)
 ### 1. 配置环境
++ 使用venv即可
 ### 2. 输入参数
 + 格式: 
 ```shell
@@ -22,8 +23,7 @@ py ./RUTask.py -n 'unet' #train a new model
 #### **施工进度:**
 1. unet train部分(再写一个)
 2. VOC的数据加载(unet部分)
-~~3. ckpt机制~~
-4. log系统
-5. 可视化loss曲线
-6. 完善RUT.py
-7. 各种bug
+3. log系统
+4. 可视化loss曲线
+5. 完善RUT.py
+6. 各种bug
